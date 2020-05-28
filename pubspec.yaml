@@ -5,3 +5,7 @@ homepage: https://github.com/mauriciotogneri/mockserver-dart
 
 environment:
   sdk: ">=2.8.0 <3.0.0"
+
+dev_dependencies:
+  build_runner: ^1.10.0
+  test: ^1.14.5

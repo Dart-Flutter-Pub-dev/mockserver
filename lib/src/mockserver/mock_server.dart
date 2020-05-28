@@ -29,13 +29,13 @@ class MockServer {
       if (endPoint != null) {
         endPoint.processRequest(request, response, endPointDelay);
       } else {
-        response.statusCode = 404;
+        response.statusCode = StatusCode.NOT_FOUND;
         response.close();
       }
     } catch (e) {
       print(e.toString());
 
-      response.statusCode = 500;
+      response.statusCode = StatusCode.INTERNAL_SERVER_ERROR;
       response.close();
     }
   }
