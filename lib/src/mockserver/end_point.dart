@@ -4,17 +4,15 @@ import 'dart:io';
 abstract class EndPoint {
   final String method;
   final String path;
-  final String route;
+  final String _route;
 
   EndPoint({
     this.method,
     this.path,
-  }) : route = path.replaceAll(RegExp('\\{.*\\}'), '[^\/]+');
-
-  bool get hasPathParameters => path != route;
+  }) : _route = path.replaceAll(RegExp('\\{.+\\}'), '[^\/]+');
 
   bool match(String method, String path) =>
-      (method == this.method) && RegExp('^$route\$').hasMatch(path);
+      (method == this.method) && RegExp('^$_route\$').hasMatch(path);
 
   void processRequest(HttpRequest request, HttpResponse response, int delay) {
     Future.delayed(

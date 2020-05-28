@@ -5,50 +5,48 @@ class MockServer {
   final int port;
   final List<EndPoint> endPoints;
   final int endPointDelay;
-  HttpServer server;
+  HttpServer _server;
 
   MockServer({
-    this.port,
-    this.endPoints,
+    this.port = 8080,
+    this.endPoints = const [],
     this.endPointDelay = 500,
   });
 
   Future<dynamic> start() async {
-    server = await HttpServer.bind(InternetAddress.anyIPv6, port);
-    server.listen(onRequest);
+    _server = await HttpServer.bind(InternetAddress.anyIPv6, port);
+    _server.listen(onRequest);
   }
 
-  Future<dynamic> stop() => server.close();
+  Future<dynamic> stop() => _server.close();
 
   void onRequest(HttpRequest request) {
     final HttpResponse response = request.response;
-    final String method = request.method;
-    final String path = request.uri.path;
 
     try {
-      for (EndPoint endPoint in endPoints) {
-        if (!endPoint.hasPathParameters && endPoint.match(method, path)) {
-          endPoint.processRequest(request, response, endPointDelay);
-          return;
-        }
-      }
+      final EndPoint endPoint = _endPoint(request.method, request.uri.path);
 
-      for (EndPoint endPoint in endPoints) {
-        if (endPoint.match(method, path)) {
-          endPoint.processRequest(request, response, endPointDelay);
-          return;
-        }
+      if (endPoint != null) {
+        endPoint.processRequest(request, response, endPointDelay);
+      } else {
+        response.statusCode = 404;
+        response.close();
       }
     } catch (e) {
       print(e.toString());
 
       response.statusCode = 500;
       response.close();
+    }
+  }
 
-      return;
+  EndPoint _endPoint(String method, String path) {
+    for (EndPoint endPoint in endPoints) {
+      if (endPoint.match(method, path)) {
+        return endPoint;
+      }
     }
 
-    response.statusCode = 404;
-    response.close();
+    return null;
   }
 }
