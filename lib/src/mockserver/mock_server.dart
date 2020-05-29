@@ -42,6 +42,12 @@ class MockServer {
 
   EndPoint _endPoint(String method, String path) {
     for (EndPoint endPoint in endPoints) {
+      if (!endPoint.hasPathParameters && endPoint.match(method, path)) {
+        return endPoint;
+      }
+    }
+
+    for (EndPoint endPoint in endPoints) {
       if (endPoint.match(method, path)) {
         return endPoint;
       }

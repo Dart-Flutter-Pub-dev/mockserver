@@ -14,6 +14,8 @@ abstract class EndPoint {
   bool match(String method, String path) =>
       (method == this.method) && _pathMatcher.match(path);
 
+  bool get hasPathParameters => path != _pathMatcher.route;
+
   void processRequest(HttpRequest request, HttpResponse response, int delay) {
     Future.delayed(
       Duration(milliseconds: delay),
@@ -25,12 +27,12 @@ abstract class EndPoint {
 }
 
 class PathMatcher {
-  final String _route;
+  final String route;
 
   PathMatcher(String path)
-      : _route = path.replaceAll(RegExp('\\{.+\\}'), '[^\/]+');
+      : route = path.replaceAll(RegExp('\\{.+\\}'), '[^\/]+');
 
-  bool match(String path) => RegExp('^$_route\$').hasMatch(path);
+  bool match(String path) => RegExp('^$route\$').hasMatch(path);
 }
 
 extension HttpHttpRequestExtension on HttpRequest {
