@@ -4,47 +4,47 @@ import 'package:test/test.dart';
 void main() {
   group('path matching', () {
     test('/pet/123', () {
-      expect(_index(PATHS, '/pet/123'), 0);
+      check('/pet/123', 0);
     });
 
     test('/pet/123/image', () {
-      expect(_index(PATHS, '/pet/123/image'), 1);
+      check('/pet/123/image', 1);
     });
 
     test('/pet', () {
-      expect(_index(PATHS, '/pet'), 2);
+      check('/pet', 2);
     });
 
     test('/pet/search', () {
-      expect(_index(PATHS, '/pet/search'), 3);
+      check('/pet/search', 3);
     });
 
     test('/user/john', () {
-      expect(_index(PATHS, '/user/john'), 4);
+      check('/user/john', 4);
     });
 
     test('/user/login', () {
-      expect(_index(PATHS, '/user/login'), 5);
+      check('/user/login', 5);
     });
 
     test('/user', () {
-      expect(_index(PATHS, '/user'), 6);
+      check('/user', 6);
     });
 
     test('/store/inventory', () {
-      expect(_index(PATHS, '/store/inventory'), 7);
+      check('/store/inventory', 7);
     });
 
     test('/store/order/123', () {
-      expect(_index(PATHS, '/store/order/123'), 8);
+      check('/store/order/123', 8);
     });
 
     test('/store/order/123/download', () {
-      expect(_index(PATHS, '/store/order/123/download'), 9);
+      check('/store/order/123/download', 9);
     });
 
     test('/store/order', () {
-      expect(_index(PATHS, '/store/order'), 10);
+      check('/store/order', 10);
     });
   });
 }
@@ -64,6 +64,8 @@ const List<String> PATHS = [
   '/store/order/{orderId}/download', // 9
   '/store/order', // 10
 ];
+
+void check(String path, int index) => expect(_index(PATHS, path), index);
 
 int _index(List<String> paths, String path) {
   for (int i = 0; i < paths.length; i++) {
