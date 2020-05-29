@@ -5,3 +5,7 @@
 ## [1.1.0] - 2020-05-28
 
 * Added request and response extensions
+
+## [1.2.0] - 2020-05-29
+
+* Added unit tests. Code refactoring

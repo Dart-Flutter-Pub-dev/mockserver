@@ -71,6 +71,14 @@ int _index(List<String> paths, String path) {
   for (int i = 0; i < paths.length; i++) {
     final PathMatcher pathMatcher = PathMatcher(paths[i]);
 
+    if (!paths[i].contains('{') && pathMatcher.match(path)) {
+      return i;
+    }
+  }
+
+  for (int i = 0; i < paths.length; i++) {
+    final PathMatcher pathMatcher = PathMatcher(paths[i]);
+
     if (pathMatcher.match(path)) {
       return i;
     }
