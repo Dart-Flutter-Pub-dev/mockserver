@@ -30,7 +30,7 @@ class PathMatcher {
   final String route;
 
   PathMatcher(String path)
-      : route = path.replaceAll(RegExp('\\{.+\\}'), '[^\/]+');
+      : route = path.replaceAll(RegExp('\\{[^\/]+\\}'), '[^\/]+');
 
   bool match(String path) => RegExp('^$route\$').hasMatch(path);
 }

@@ -1,6 +1,6 @@
 name: mockserver
 description: A mock server for Dart to accelerate development when the server is not ready yet.
-version: 1.2.0
+version: 1.2.1
 homepage: https://github.com/mauriciotogneri/mockserver-dart
 
 environment:

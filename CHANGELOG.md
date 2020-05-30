@@ -9,3 +9,7 @@
 ## [1.2.0] - 2020-05-29
 
 * Added unit tests. Code refactoring
+
+## [1.2.1] - 2020-05-30
+
+* Fixed path matching bug
