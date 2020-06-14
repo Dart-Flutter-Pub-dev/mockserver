@@ -9,7 +9,7 @@ class MockServer {
 
   MockServer({
     this.port = 8080,
-    this.endPoints = const [],
+    this.endPoints = const <EndPoint>[],
     this.endPointDelay = 500,
   });
 
@@ -41,13 +41,13 @@ class MockServer {
   }
 
   EndPoint _endPoint(String method, String path) {
-    for (EndPoint endPoint in endPoints) {
+    for (final EndPoint endPoint in endPoints) {
       if (!endPoint.hasPathParameters && endPoint.match(method, path)) {
         return endPoint;
       }
     }
 
-    for (EndPoint endPoint in endPoints) {
+    for (final EndPoint endPoint in endPoints) {
       if (endPoint.match(method, path)) {
         return endPoint;
       }

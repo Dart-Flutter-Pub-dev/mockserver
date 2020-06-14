@@ -2,7 +2,7 @@ import 'package:mockserver/src/mockserver/mock_server.dart';
 import 'package:mockserver/src/mockserver/end_point.dart';
 
 Future<dynamic> main() async {
-  final List<EndPoint> endPoints = [
+  final List<EndPoint> endPoints = <EndPoint>[
     // end points
   ];
 

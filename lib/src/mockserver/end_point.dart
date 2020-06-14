@@ -17,7 +17,7 @@ abstract class EndPoint {
   bool get hasPathParameters => path != _pathMatcher.route;
 
   void processRequest(HttpRequest request, HttpResponse response, int delay) {
-    Future.delayed(
+    Future<void>.delayed(
       Duration(milliseconds: delay),
       () => process(request, response),
     );
@@ -30,7 +30,7 @@ class PathMatcher {
   final String route;
 
   PathMatcher(String path)
-      : route = path.replaceAll(RegExp('\\{[^\/]+\\}'), '[^\/]+');
+      : route = path.replaceAll(RegExp('\\{[^/]+\\}'), '[^/]+');
 
   bool match(String path) => RegExp('^$route\$').hasMatch(path);
 }
@@ -58,7 +58,7 @@ extension HttpResponseExtension on HttpResponse {
 
   void fill({
     int statusCode = StatusCode.OK,
-    Map<String, String> headers = const {},
+    Map<String, String> headers = const <String, String>{},
     Object json,
     Object body,
   }) {

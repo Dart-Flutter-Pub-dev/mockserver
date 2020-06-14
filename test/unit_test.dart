@@ -49,7 +49,7 @@ void main() {
   });
 }
 
-const List<String> PATHS = [
+const List<String> PATHS = <String>[
   '/pet/{petId}', // 0
   '/pet/{petId}/image', // 1
   '/pet', // 2
