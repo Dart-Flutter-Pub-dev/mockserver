@@ -13,3 +13,7 @@
 ## [1.2.1] - 2020-05-30
 
 * Fixed path matching bug
+
+## [1.3.0] - 2020-09-15
+
+* Code cleanup

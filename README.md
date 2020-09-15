@@ -2,6 +2,15 @@
 
 A mock server for Dart.
 
+## Installation
+
+Add the following dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies: 
+  mockserver: ^1.3.0
+```
+
 ## Example
 
 ```dart
