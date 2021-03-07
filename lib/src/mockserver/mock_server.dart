@@ -5,26 +5,26 @@ class MockServer {
   final int port;
   final List<EndPoint> endPoints;
   final int endPointDelay;
-  HttpServer _server;
+  late HttpServer _server;
 
   MockServer({
     this.port = 8080,
     this.endPoints = const <EndPoint>[],
-    this.endPointDelay = 500,
+    this.endPointDelay = 0,
   });
 
   Future<dynamic> start() async {
     _server = await HttpServer.bind(InternetAddress.anyIPv6, port);
-    _server.listen(onRequest);
+    _server.listen(_onRequest);
   }
 
   Future<dynamic> stop() => _server.close();
 
-  void onRequest(HttpRequest request) {
+  void _onRequest(HttpRequest request) {
     final HttpResponse response = request.response;
 
     try {
-      final EndPoint endPoint = _endPoint(request.method, request.uri.path);
+      final EndPoint? endPoint = _endPoint(request.method, request.uri.path);
 
       if (endPoint != null) {
         endPoint.processRequest(request, response, endPointDelay);
@@ -40,7 +40,7 @@ class MockServer {
     }
   }
 
-  EndPoint _endPoint(String method, String path) {
+  EndPoint? _endPoint(String method, String path) {
     for (final EndPoint endPoint in endPoints) {
       if (!endPoint.hasPathParameters && endPoint.match(method, path)) {
         return endPoint;

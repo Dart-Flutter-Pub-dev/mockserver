@@ -7,8 +7,8 @@ abstract class EndPoint {
   final PathMatcher _pathMatcher;
 
   EndPoint({
-    this.method,
-    this.path,
+    required this.method,
+    required this.path,
   }) : _pathMatcher = PathMatcher(path);
 
   bool match(String method, String path) =>
@@ -42,15 +42,15 @@ extension HttpHttpRequestExtension on HttpRequest {
 
   String path(int index) => uri.pathSegments[index];
 
-  String header(String name) => headers[name][0];
+  String header(String name) => headers[name]![0];
 
   bool hasHeader(String name) => headers[name] != null;
 
   Map<String, String> get queryParameters => uri.queryParameters;
 
-  String query(String name) => queryParameters[name];
+  String query(String name) => queryParameters[name]!;
 
-  bool hasQuery(String name) => query(name) != null;
+  bool hasQuery(String name) => queryParameters.containsKey(name);
 }
 
 extension HttpResponseExtension on HttpResponse {
@@ -59,8 +59,8 @@ extension HttpResponseExtension on HttpResponse {
   void fill({
     int statusCode = StatusCode.OK,
     Map<String, String> headers = const <String, String>{},
-    Object json,
-    Object body,
+    Object? json,
+    Object? body,
   }) {
     this.statusCode = statusCode;
 
