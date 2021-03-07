@@ -8,7 +8,7 @@ Add the following dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies: 
-  mockserver: ^1.3.0
+  mockserver: ^1.4.0
 ```
 
 ## Example
