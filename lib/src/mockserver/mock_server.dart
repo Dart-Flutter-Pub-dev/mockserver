@@ -13,9 +13,10 @@ class MockServer {
     this.endPointDelay = 0,
   });
 
-  Future<dynamic> start() async {
+  Future<int> start() async {
     _server = await HttpServer.bind(InternetAddress.anyIPv6, port);
     _server.listen(_onRequest);
+    return _server.port;
   }
 
   Future<dynamic> stop() => _server.close();
